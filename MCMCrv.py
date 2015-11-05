@@ -10,7 +10,7 @@ date = np.array(data['date'])
 RV = np.array(data['RV'])*1e2 #m->cm
 sig = np.array(data['sig'])*1e2 #m->cm
 m1 = 1.148*1.989e33
-niter=100001
+niter=300001
 
 def calcX2(T0,P,Msini):#,v0):
     Ps=P*86400.
@@ -44,8 +44,8 @@ Msinin=Msini
 change=[]
 
 for i in range(0,niter):
-    if (i%10000 == 0):
-        print i/1000,'%'
+    if (i%30000 == 0):
+        print i/3000,'%'
         #generate new model
     n=np.random.random_integers(1,high=3)
     #n=3 #used for fine tuning widths to get acceptance fraction 20-40%

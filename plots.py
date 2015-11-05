@@ -12,7 +12,7 @@ acc = fits.getdata('accept.fits')
 samples = fits.getdata('samples.fits')
 chi = fits.getdata('Chi2vals.fits')
 
-plt.hist(acc)
+print plt.hist(acc,bins=2,normed=1)[0]/2.
 plt.savefig('acc.pdf')
 plt.clf()
 
@@ -31,16 +31,11 @@ plt.clf()
 samples[:,0]=samples[:,0]-2451725.
 samples[:,1]=samples[:,1]-3.5
 samples[:,2]=samples[:,2]/mjup
-fig = corner.corner(samples[20000:],labels=[r"$\tau_0 [\mathrm{HJD}-2451725]$",r"$P [\mathrm{days}-3.5]$",r"$M\sin i [M_\mathrm{J}]$"],quantiles=[0.16,0.5,0.84],verbose=1,use_math_text=1,levels=[0.68,0.95,0.997])#,title_fmt=".4f",show_titles=1
-#plt.subplot(338)
-ax_list=fig.axes
-for i in ax_list:
-    i.tic_params(labelsize=8)
-    #i.xaxis.lapelpad=140
-    #i.yaxis.labelpad=140
-#plt.gca().tic_params(labelsize=8)
-#plt.gca().xaxis.labelpad=20
-#plt.gca().yaxis.labelpad=20
+fig,axarr = plt.subplots(3,3)
+fig = corner.corner(samples[20000:],fig=fig,labels=[r"$\tau_0 [\mathrm{HJD}-2451725]$",r"$P [\mathrm{days}-3.5]$",r"$M\sin i [M_\mathrm{J}]$"],quantiles=[0.16,0.5,0.84],verbose=1,use_math_text=1,levels=[0.68,0.95,0.997],tick_labelsize=8)
+axarr[1,0].tick_params(axis='both',labelsize=8)
+axarr[2,1].tick_params(axis='both',labelsize=8)
+axarr[2,0].tick_params(axis='both',labelsize=10)
 fig.savefig('corner.pdf')
 plt.clf()
 
