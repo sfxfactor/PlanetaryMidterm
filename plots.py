@@ -17,10 +17,14 @@ plt.savefig('acc.pdf')
 plt.clf()
 
 plt.plot(chi)
+plt.xlabel("Step number")
+plt.ylabel(r"$\chi^2$")
 plt.savefig('chiAll.pdf')
 plt.clf()
 
 plt.plot(chi[20000:])
+plt.xlabel("Step number after 20,000")
+plt.ylabel(r"$\chi^2$")
 plt.savefig('chiMinusBurn.pdf')
 plt.clf()
 
@@ -28,6 +32,15 @@ samples[:,0]=samples[:,0]-2451725.
 samples[:,1]=samples[:,1]-3.5
 samples[:,2]=samples[:,2]/mjup
 fig = corner.corner(samples[20000:],labels=[r"$\tau_0 [\mathrm{HJD}-2451725]$",r"$P [\mathrm{days}-3.5]$",r"$M\sin i [M_\mathrm{J}]$"],quantiles=[0.16,0.5,0.84],verbose=1,use_math_text=1,levels=[0.68,0.95,0.997])#,title_fmt=".4f",show_titles=1
+#plt.subplot(338)
+ax_list=fig.axes
+for i in ax_list:
+    i.tic_params(labelsize=8)
+    #i.xaxis.lapelpad=140
+    #i.yaxis.labelpad=140
+#plt.gca().tic_params(labelsize=8)
+#plt.gca().xaxis.labelpad=20
+#plt.gca().yaxis.labelpad=20
 fig.savefig('corner.pdf')
 plt.clf()
 
@@ -53,8 +66,10 @@ t=np.linspace(0,P,1000)
 m = bfrv(t)
 
 phdate = (date - T0)%P
-plt.errorbar(phdate,RV,yerr=sig,fmt='o')
-plt.plot(t,m)
+plt.errorbar(phdate/P,RV*1e-2,yerr=sig*1e-2,fmt='o')
+plt.plot(t/P,m*1e-2)
+plt.xlabel('Phase')
+plt.ylabel(r"$RV [\mathrm{m/s}]$")
 plt.savefig('phrv.pdf')
 plt.clf()
 
