@@ -26,9 +26,9 @@ plt.clf()
 
 uSamples=samples
 uSamples[:,0]=samples[:,0]-2451725.
-uSamples[:,1]=samples[:,1]-3.5246
+uSamples[:,1]=samples[:,1]-3.5
 uSamples[:,2]=samples[:,2]/mjup
-fig = corner.corner(uSamples[20000:],labels=[r"$\tau_0~[\mathrm{HJD}]$",r"$P~[\mathrm{days}]$",r"$M\sin i~[M_\mathrm{Jup}]$"],title_fmt=".6f",quantiles=[0.16,0.5,0.84],show_titles=1,verbose=1,use_math_text=1,levels=[0.68,0.95,0.997])
+fig = corner.corner(uSamples[20000:],labels=[r"$\tau_0 [\mathrm{HJD}]$",r"$P [\mathrm{days}]$",r"$M\sin i [M_\mathrm{J}]$"],title_fmt=".3f",quantiles=[0.16,0.5,0.84],show_titles=1,verbose=1,use_math_text=1,levels=[0.68,0.95,0.997])
 fig.savefig('corner.pdf')
 plt.clf()
 
