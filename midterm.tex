@@ -44,7 +44,7 @@ The optimum acceptance fraction of a MH sampler is between 40\% (for 1 dimension
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.5\textwidth]{acc.pdf}
+    \includegraphics[width=0.5\textwidth]{outputs/acc.pdf}
     \caption{Histogram (normalized to a probability density of 1) of acceptance for an MCMC run. 0 is reject, and 1 is accept.}
     \label{fig:acchist}
 \end{center}
@@ -54,7 +54,7 @@ Before any analysis can be done on the Markov chain, the ``burn in" steps must b
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.6\textwidth]{chiMinusBurn.pdf}
+    \includegraphics[width=0.6\textwidth]{outputs/chiMinusBurn.pdf}
     \caption{$\chi^2$ values after 20,000 steps. There is no downward trend in the values, showing that the chain is fully burned in.}
     \label{fig:chi}
 \end{center}
@@ -79,7 +79,7 @@ Median values and $1\sigma$ error bars for the burned in Markov chain are given 
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=\textwidth]{corner.pdf}
+    \includegraphics[width=\textwidth]{outputs/corner.pdf}
     \caption{Posterior probability distributions for the 3 fitted parameters. Contours are at 67\%, 95\%, and 99.7\%. Dashed lines in the 1D marginalized distributions show the median and 67\% confidence interval. Blue lines show the literature values of $P[\mathrm{days}]=3.52472\pm0.00003$ and $M_p[M_J]=0.69\pm0.02$ \citep{e}.}
     \label{fig:corner}
 \end{center}
@@ -87,7 +87,7 @@ Median values and $1\sigma$ error bars for the burned in Markov chain are given 
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.6\textwidth]{phrv.pdf}
+    \includegraphics[width=0.6\textwidth]{outputs/phrv.pdf}
     \caption{Phased RV curve showing the data and best fit model.}
     \label{fig:rv}
 \end{center}
@@ -99,7 +99,7 @@ Since the anomalies are near a phase of zero, it is possible that these data poi
 
 \begin{figure}
 \begin{center}
-    \includegraphics[width=0.6\textwidth]{rverror.pdf}
+    \includegraphics[width=0.6\textwidth]{outputs/rverror.pdf}
     \caption{RV curve showing the data and best fit model around the anomalous data points.}
     \label{fig:err}
 \end{center}
