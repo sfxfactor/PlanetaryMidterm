@@ -32,7 +32,7 @@ samples[:,0]=samples[:,0]-2451725.
 samples[:,1]=samples[:,1]-3.5
 samples[:,2]=samples[:,2]/mjup
 fig,axarr = plt.subplots(3,3)
-fig = corner.corner(samples[20000:],fig=fig,labels=[r"$\tau_0 [\mathrm{HJD}-2451725]$",r"$P [\mathrm{days}-3.5]$",r"$M\sin i [M_\mathrm{J}]$"],quantiles=[0.16,0.5,0.84],verbose=1,use_math_text=1,levels=[0.68,0.95,0.997],tick_labelsize=8)
+fig = corner.corner(samples[20000:],fig=fig,truths=[None,0.02472,0.69],labels=[r"$\tau_0 [\mathrm{HJD}-2451725]$",r"$P [\mathrm{days}-3.5]$",r"$M\sin i [M_\mathrm{J}]$"],quantiles=[0.16,0.5,0.84],verbose=1,use_math_text=1,levels=[0.68,0.95,0.997],tick_labelsize=8)
 axarr[1,0].tick_params(axis='both',labelsize=8)
 axarr[2,1].tick_params(axis='both',labelsize=8)
 axarr[2,0].tick_params(axis='both',labelsize=10)
@@ -68,17 +68,20 @@ plt.ylabel(r"$RV [\mathrm{m/s}]$")
 plt.savefig('phrv.pdf')
 plt.clf()
 
-#def npbfrv(dates):
-#    Ps = P*86400
-#    n = (2.*np.pi)/Ps
-#    a = ((G*m1*Ps**2)/(4.*np.pi**2))**(1./3.)
-#    vsini = (Msini/m1)*n*a
-#    model = (vsini * np.sin(2.*np.pi*(dates-T0)/P))
-#    return model
-#
-#t=np.linspace(np.min(date),np.max(date),10000)
-#
-#plt.errorbar(date,RV,yerr=sig,fmt='o')
-#plt.plot(t,npbfrv(t))
-#plt.show()
-#plt.clf()
+def npbfrv(dates):
+    Ps = P*86400
+    n = (2.*np.pi)/Ps
+    a = ((G*m1*Ps**2)/(4.*np.pi**2))**(1./3.)
+    vsini = (Msini/m1)*n*a
+    model = (vsini * np.sin(2.*np.pi*(dates-T0)/P))
+    return model
+
+t=np.linspace(np.min(date),np.max(date),500000)
+
+plt.errorbar(date,RV*1e-2,yerr=sig*1e-2,fmt='o')
+plt.plot(t,npbfrv(t)*1e-2)
+plt.xlim((2.451754e6,P+2.451754e6))
+plt.xlabel(r"HJD")
+plt.ylabel(r"$RV [\mathrm{m/s}]$")
+plt.savefig('rverror.pdf')
+plt.clf()

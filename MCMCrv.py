@@ -2,6 +2,7 @@ import numpy as np
 import astropy.io.ascii as ascii
 from astropy.io import fits
 G = 6.67259e-8 #cm^3 g^-1 s^-2
+m1 = 1.148*1.989e33
 
 #get data
 dataTitle = 'RV'
@@ -9,7 +10,6 @@ data = ascii.read(dataTitle+'.dat')
 date = np.array(data['date'])
 RV = np.array(data['RV'])*1e2 #m->cm
 sig = np.array(data['sig'])*1e2 #m->cm
-m1 = 1.148*1.989e33
 niter=300001
 
 def calcX2(T0,P,Msini):#,v0):
@@ -27,9 +27,9 @@ T0 = 2451725.4
 P = 3.524
 Msini =1.*1.898e30
 #v0 = 0.0
-sT = 0.01
-sP = 0.0006
-sM = 4e28
+sT = 0.009
+sP = 0.00004
+sM = 3.5e28
 #sv = 1.
 
 Chi2 = calcX2(T0,P,Msini) #,v0)
@@ -48,7 +48,7 @@ for i in range(0,niter):
         print i/3000,'%'
         #generate new model
     n=np.random.random_integers(1,high=3)
-    #n=3 #used for fine tuning widths to get acceptance fraction 20-40%
+    #n=1 #used for fine tuning widths to get acceptance fraction 20-40%
     change=np.append(change,n)
     if n==1:
         T0n=np.random.normal(T0,sT)
